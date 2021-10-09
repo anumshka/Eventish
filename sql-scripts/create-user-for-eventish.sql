@@ -1,0 +1,5 @@
+CREATE USER admin WITH PASSWORD 'admin'
+GRANT ALL
+ON ALL TABLES
+IN SCHEMA "public"
+TO admin ;
