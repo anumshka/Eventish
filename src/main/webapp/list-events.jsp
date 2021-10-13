@@ -14,7 +14,14 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<link type="text/css" rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="css/style-list.css">
+
 </head>
 
 
@@ -26,6 +33,8 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 
 
 	<div class="container">
+	
+	<!--  
 
 		<div id="content">
 
@@ -45,9 +54,11 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 					<th>Fees</th>
 					<th>Form</th>
 					<th>Description</th>
+					<th>Operations</th>
+				</tr>
 
 
-					<c:forEach var="temp" items="${EVENT_LIST }">
+					<c:forEach var="temp" items="${EVENT_LIST}">
 						<c:url var="link" value="EpisodeController">
 							<c:param name="cmd" value="LOAD" />
 							<c:param name="epid" value="${temp.eventId }" />
@@ -59,6 +70,7 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 						</c:url>
 
 						<tr>
+						  
 							<td>${temp.eventName}</td>
 							<td>${temp.eventType}</td>
 							<td>${temp.eventCatagory}</td>
@@ -69,14 +81,42 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 							<td>${temp.registrationForm}</td>
 							<td>${temp.description}</td>
 
-							<td><a href="${link}"> update </a> | <a href="${deleteLink}">
-									delete </a></td>
+							<td><a href="${link}"><button class="operations">Update </button> </a> </td>
+							<td> <a href="${deleteLink}">
+									<button class="operations">Delete</button> </a></td>
 						</tr>
 					</c:forEach>
+				
 			</table>
+			-->
+			<h1 id="PageHead">Eventish</h1>
+			
+			
+			<div class="events-box">
+			<c:forEach var="temp" items="${EVENT_LIST}">
+			<div class="myEvent">
+			 <div class="eventName">
+			 <h3 class="eventNameHeading">${temp.eventName}</h3>
+			 
+			 <p>${temp.eventCatagory}</p>
+			 <p>${temp.eventDate}</p>
+			 <p>${temp.eventTime}</p>
+			 <div class="myOperations">
+			 <button type="submit" id="del" class="del-btn"><i class="fa fa-trash" aria-hidden="true"
+                    style="font-size:14px"></i></button>
+              <button type="submit" class="edit-button"><i class="fa fa-pencil-square-o url_name" aria-hidden="true"
+                        style="font-size:18px"></i></button>
+                        
+                    </div>
+                    <button onclick="myFunction()" class="knowMores">Know more</button>
+			 </div>
+			</div>
+				</c:forEach>
+			</div>
+			
 		</div>
 	</div>
-
+<script src = "js/myJavascript.js"></script>
 </body>
 <!-- Footer -->
 <footer class="page-footer font-small blue">
