@@ -10,8 +10,8 @@
 }
 .myEvent{
 	display: flex;
-	height:350px;
-	width:450px;
+	height:auto;
+	width:500px;
 	position:relative;
 	justify-content :center;
 	align-items:center;
@@ -67,5 +67,4 @@
 	border-radius:30%;
 	width : 40%;
 	margin:auto;
-	
 }

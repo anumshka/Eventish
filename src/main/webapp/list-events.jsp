@@ -95,12 +95,18 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 			<div class="events-box">
 			<c:forEach var="temp" items="${EVENT_LIST}">
 			<div class="myEvent">
-			 <div class="eventName">
+			 <div class="eventName" >
 			 <h3 class="eventNameHeading">${temp.eventName}</h3>
 			 
 			 <p>${temp.eventCatagory}</p>
 			 <p>${temp.eventDate}</p>
 			 <p>${temp.eventTime}</p>
+			 <div id ='${temp.eventId}' style="display : none">
+			  <p>${temp.eventType}</p>
+			 <p>${temp.venue}</p>
+			 <p>${temp.registrationFees}</p>
+			 <p>${temp.description}</p>
+			 </div>
 			 <div class="myOperations">
 			 <button type="submit" id="del" class="del-btn"><i class="fa fa-trash" aria-hidden="true"
                     style="font-size:14px"></i></button>
@@ -108,7 +114,7 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
                         style="font-size:18px"></i></button>
                         
                     </div>
-                    <button onclick="myFunction()" class="knowMores">Know more</button>
+                    <button onclick="myFunction('${temp.eventId}')" class="knowMores">Know more</button>
 			 </div>
 			</div>
 				</c:forEach>
