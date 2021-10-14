@@ -2,6 +2,9 @@
 	padding : 0;
 	margin : 0;
 }
+body{
+	background:black;
+}
 .events-box{
 	display : flex;
 	flex-direction : row;
@@ -19,7 +22,7 @@
 	margin:10px;
 	padding: 10px;
 	border-radius : 10%;
-	
+	color:white;
 	font-size:2.1rem;
 	box-shadow : 2px white;
 }
@@ -45,7 +48,7 @@
 .del-btn{
     padding: 10px;
     margin: 10px;
-  
+    color:black;
 }
 
 .edit-button{
@@ -54,6 +57,7 @@
     border: 0px;
     padding: 10px;
     margin: 10px;
+    color:black;
   
 }
 
@@ -67,4 +71,34 @@
 	border-radius:30%;
 	width : 40%;
 	margin:auto;
+	color:black;
 }
+
+
+.header{
+	color:white;
+	text-align : center;
+	padding:20px;
+	margin:10px;
+	font-family: 'Oswald', sans-serif;
+	font-size:2.4rem;
+}
+
+#PageHead{
+	color:white;
+	text-align : center;
+	padding:20px;
+	margin:10px;
+	font-family: 'Oswald', sans-serif;
+	font-size:4rem;
+}
+
+.footer{
+	color:white;
+	text-align : center;
+	padding:20px;
+	margin:10px;
+	font-family: 'Oswald', sans-serif;
+	font-size:2.4rem;
+}
+
