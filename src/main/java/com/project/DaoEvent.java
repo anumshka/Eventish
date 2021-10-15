@@ -29,7 +29,7 @@ public class DaoEvent {
 		try {
 
 			// Get a connection
-			myCn = MyConnection.createConnection();
+			myCn = dataSource.getConnection();
 
 			// Create sql statement
 			String sql = "select * from event";
@@ -83,7 +83,7 @@ public class DaoEvent {
 		try {
 
 			// Get a connection
-			myCn = MyConnection.createConnection();
+			myCn = dataSource.getConnection();
 
 			// Create sql statement
 			String sql = "DELETE FROM event WHERE event_id=?";
