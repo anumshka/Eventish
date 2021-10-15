@@ -74,7 +74,8 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 							<p>${temp.description}</p>
 						</div>
 						<div class="myOperations">
-							<a href="${deleteLink}">
+							<a href="${deleteLink}"
+								onclick="return confirm('Are you sure you want to delete this item?');">
 								<button type="submit" id="del" class="del-btn">
 									<i class="fa fa-trash" aria-hidden="true"
 										style="font-size: 14px"></i>
