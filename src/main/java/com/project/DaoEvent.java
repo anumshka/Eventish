@@ -1,4 +1,5 @@
 package com.project;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +12,7 @@ import org.apache.catalina.manager.DummyProxySession;
 
 public class DaoEvent {
 
-	private  DataSource dataSource;
+	private DataSource dataSource;
 
 	public DaoEvent(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -28,7 +29,7 @@ public class DaoEvent {
 		try {
 
 			// Get a connection
-			myCn = dataSource.getConnection();
+			myCn = MyConnection.createConnection();
 
 			// Create sql statement
 			String sql = "select * from event";
@@ -57,6 +58,7 @@ public class DaoEvent {
 						registrationFees, registrationForm, description);
 
 				// Add to the list of episodes
+
 				events.add(tempEvent);
 
 			}
@@ -66,6 +68,41 @@ public class DaoEvent {
 			// Close JDBC Connections
 			close(myCn, mySm, myRs);
 
+		}
+
+	}
+
+	public boolean deleteGivenEvent(int eventID) {
+		boolean flag = false;
+
+		Connection myCn = null;
+		Statement mySm = null;
+		ResultSet myRs = null;
+		PreparedStatement myPrSm = null;
+
+		try {
+
+			// Get a connection
+			myCn = MyConnection.createConnection();
+
+			// Create sql statement
+			String sql = "DELETE FROM event WHERE event_id=?";
+			myPrSm = myCn.prepareStatement(sql);
+
+			// Execute query
+			myPrSm.setInt(1, eventID);
+
+			myPrSm.executeUpdate();
+			flag = true;
+
+			// Process result
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			flag = false;
+			e.printStackTrace();
+		} finally {
+			return flag;
 		}
 
 	}
