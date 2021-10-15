@@ -1,4 +1,5 @@
 package com.project;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
 
 @WebServlet("/EventController")
 public class EventController extends HttpServlet {
@@ -50,6 +50,8 @@ public class EventController extends HttpServlet {
 			// read the command parameter
 			String cmd = request.getParameter("cmd");
 
+			System.out.println(cmd + "is calledd");
+
 			// if cmd is missing , then list
 
 			if (cmd == null) {
@@ -61,6 +63,12 @@ public class EventController extends HttpServlet {
 			case "LIST":
 				listEvents(request, response);
 				break;
+			case "DELETE":
+				System.out.println("Hello yar please print ");
+
+				deleteEvent(request, response);
+				break;
+
 			default:
 				listEvents(request, response);
 			}
@@ -85,4 +93,15 @@ public class EventController extends HttpServlet {
 
 	}
 
+	// To delete a particular Event
+	private void deleteEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		System.out.println("Delete event called ");
+		String idString = request.getParameter("epid");
+		int id = Integer.parseInt(idString);
+		System.out.println(id);
+		listEvents(request, response);
+	}
+
 }
+

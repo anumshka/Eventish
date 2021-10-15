@@ -56,7 +56,7 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 					<c:param name="epid" value="${temp.eventId }" />
 				</c:url>
 
-				<c:url var="deleteLink" value="EpisodeController">
+				<c:url var="deleteLink" value="EventController">
 					<c:param name="cmd" value="DELETE" />
 					<c:param name="epid" value="${temp.eventId }" />
 				</c:url>
@@ -74,13 +74,12 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 							<p>${temp.description}</p>
 						</div>
 						<div class="myOperations">
-							<a href="${link}">
+							<a href="${deleteLink}">
 								<button type="submit" id="del" class="del-btn">
 									<i class="fa fa-trash" aria-hidden="true"
 										style="font-size: 14px"></i>
 								</button>
-							</a> <a href="${deleteLink}"><button type="submit"
-									class="edit-button">
+							</a> <a href="${link}"><button type="submit" class="edit-button">
 									<i class="fa fa-pencil-square-o url_name" aria-hidden="true"
 										style="font-size: 18px"></i>
 								</button></a>
