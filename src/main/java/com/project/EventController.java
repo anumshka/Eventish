@@ -61,6 +61,8 @@ public class EventController extends HttpServlet {
 			case "LIST":
 				listEvents(request, response);
 				break;
+			case "ADD":
+				addEvent(request, response);
 			default:
 				listEvents(request, response);
 			}
@@ -82,6 +84,31 @@ public class EventController extends HttpServlet {
 		// send to jsp page
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/list-events.jsp");
 		dispatcher.forward(request, response);
+
+	}
+	
+	private void addEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+
+		// read about event from form
+		String eventName = request.getParameter("event_name");
+		String eventType = request.getParameter("event_type");
+		String eventCategory = request.getParameter("event_category");
+		String venue = request.getParameter("venue");
+		String eventDate = request.getParameter("event_date");
+		String eventTime = request.getParameter("event_time");
+		String registrationFees = request.getParameter("registration_fees");
+		String registrationForm = request.getParameter("registration_form");
+		String description = request.getParameter("description");
+	
+		// create new event
+		Event  newEvent = new Event(eventName,eventType,eventCategory,venue,eventDate,eventTime,registrationFees,registrationForm,description);
+
+		// add event
+		DaoEvent.addEvent(newEvent);
+
+		// get back to the main page
+		listEvents(request, response);
 
 	}
 
