@@ -1,4 +1,5 @@
 package com.project;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
 
 @WebServlet("/EventController")
 public class EventController extends HttpServlet {
@@ -63,6 +63,11 @@ public class EventController extends HttpServlet {
 				break;
 			case "ADD":
 				addEvent(request, response);
+				break;
+			case "DELETE":
+
+				deleteEvent(request, response);
+				break;
 			default:
 				listEvents(request, response);
 			}
@@ -86,7 +91,7 @@ public class EventController extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-	
+
 	private void addEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 
@@ -100,9 +105,10 @@ public class EventController extends HttpServlet {
 		String registrationFees = request.getParameter("registration_fees");
 		String registrationForm = request.getParameter("registration_form");
 		String description = request.getParameter("description");
-	
+
 		// create new event
-		Event  newEvent = new Event(eventName,eventType,eventCategory,venue,eventDate,eventTime,registrationFees,registrationForm,description);
+		Event newEvent = new Event(eventName, eventType, eventCategory, venue, eventDate, eventTime, registrationFees,
+				registrationForm, description);
 
 		// add event
 		DaoEvent.addEvent(newEvent);
@@ -112,4 +118,23 @@ public class EventController extends HttpServlet {
 
 	}
 
+	// To delete a particular Event
+	private void deleteEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		System.out.println("Delete event called ");
+		String idString = request.getParameter("epid");
+		int id = Integer.parseInt(idString);
+		System.out.println(id);
+		boolean flag = daoEvent.deleteGivenEvent(id);
+
+		if (flag) {
+			System.out.println("Successfully Deleted the event ");
+		} else {
+			System.out.println("Could not delete try again later");
+		}
+
+		listEvents(request, response);
+	}
+
 }
+
