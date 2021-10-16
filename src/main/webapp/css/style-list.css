@@ -11,6 +11,13 @@ body{
 	flex-wrap : wrap;
 	
 }
+.form-txt{
+	color:black;
+}
+.ques{
+	color:white;
+}
+
 .myEvent{
 	display: flex;
 	height:auto;
