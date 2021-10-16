@@ -1,4 +1,5 @@
 package com.project;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import org.apache.catalina.manager.DummyProxySession;
 
 public class DaoEvent {
 
-	private static  DataSource dataSource;
+	private static DataSource dataSource;
 
 	public DaoEvent(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -71,25 +72,6 @@ public class DaoEvent {
 
 	}
 
-	// Puts back in the connection pool
-	private static void close(Connection myCn, Statement mySm, ResultSet myRs) {
-		// TODO Auto-generated method stub
-		try {
-			if (myRs != null) {
-				myRs.close();
-			}
-			if (myCn != null) {
-				myCn.close();
-			}
-			if (mySm != null) {
-				mySm.close();
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-
-	}
 	public static void addEvent(Event newEvent) throws Exception {
 		// TODO Auto-generated method stub
 
@@ -110,17 +92,15 @@ public class DaoEvent {
 			mySt.setString(2, newEvent.getEventType());
 			mySt.setString(3, newEvent.getEventCategory());
 			mySt.setString(4, newEvent.getVenue());
-			String startDate=newEvent.getEventDate();
-	        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy"); 
-	        java.util.Date date = sdf1.parse(startDate); // Returns a Date format object with the pattern
-	        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+			String startDate = newEvent.getEventDate();
+			SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
+			java.util.Date date = sdf1.parse(startDate); // Returns a Date format object with the pattern
+			java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 			mySt.setDate(5, sqlDate);
 			mySt.setTime(6, java.sql.Time.valueOf(newEvent.getEventTime()));
 			mySt.setInt(7, Integer.parseInt(newEvent.getRegistrationFees()));
 			mySt.setString(8, newEvent.getRegistrationForm());
 			mySt.setString(9, newEvent.getDescription());
-			
-		
 
 			// execute sql insert
 			mySt.execute();
@@ -132,4 +112,62 @@ public class DaoEvent {
 		}
 
 	}
+
+	public boolean deleteGivenEvent(int eventID) {
+		boolean flag = false;
+
+		Connection myCn = null;
+		Statement mySm = null;
+		ResultSet myRs = null;
+		PreparedStatement myPrSm = null;
+
+		try {
+
+			// Get a connection
+			myCn = MyConnection.createConnection();
+
+			// Create sql statement
+			String sql = "DELETE FROM event WHERE event_id=?";
+			myPrSm = myCn.prepareStatement(sql);
+
+			// Execute query
+			myPrSm.setInt(1, eventID);
+
+			myPrSm.executeUpdate();
+			flag = true;
+
+			// Process result
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			flag = false;
+			e.printStackTrace();
+		} finally {
+			return flag;
+		}
+
+	}
+
+	// Puts back in the connection pool
+	private static void close(Connection myCn, Statement mySm, ResultSet myRs) {
+		// TODO Auto-generated method stub
+		try {
+			if (myRs != null) {
+				myRs.close();
+			}
+			if (myCn != null) {
+				myCn.close();
+			}
+			if (mySm != null) {
+				mySm.close();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+	}
 }
+
+
+
