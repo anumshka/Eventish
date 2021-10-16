@@ -1,5 +1,6 @@
 package com.project;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +12,7 @@ import org.apache.catalina.manager.DummyProxySession;
 
 public class DaoEvent {
 
-	private  DataSource dataSource;
+	private static  DataSource dataSource;
 
 	public DaoEvent(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -44,7 +45,7 @@ public class DaoEvent {
 				int eventId = myRs.getInt("event_id");
 				String eventName = myRs.getString("event_name");
 				String eventType = myRs.getString("event_type");
-				String eventCatagory = myRs.getString("event_category");
+				String eventCategory = myRs.getString("event_category");
 				String venue = myRs.getString("venue");
 				String eventDate = myRs.getString("event_date");
 				String eventTime = myRs.getString("event_time");
@@ -53,7 +54,7 @@ public class DaoEvent {
 				String description = myRs.getString("description");
 
 				// Create a new episode
-				Event tempEvent = new Event(eventId, eventName, eventType, eventCatagory, venue, eventDate, eventTime,
+				Event tempEvent = new Event(eventId, eventName, eventType, eventCategory, venue, eventDate, eventTime,
 						registrationFees, registrationForm, description);
 
 				// Add to the list of episodes
@@ -86,6 +87,48 @@ public class DaoEvent {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+		}
+
+	}
+	public static void addEvent(Event newEvent) throws Exception {
+		// TODO Auto-generated method stub
+
+		Connection myCn = null;
+		PreparedStatement mySt = null;
+		try {
+
+			// get db connection
+			myCn = dataSource.getConnection();
+
+			// create sql for insert
+			String sql = "INSERT INTO Event(event_name,event_type,event_category,venue,event_date,event_time,registration_fees,registration_form,description) VALUES(?,?,?,?,?,?,?,?,?)";
+
+			mySt = myCn.prepareStatement(sql);
+			// set the param values for the event
+
+			mySt.setString(1, newEvent.getEventName());
+			mySt.setString(2, newEvent.getEventType());
+			mySt.setString(3, newEvent.getEventCategory());
+			mySt.setString(4, newEvent.getVenue());
+			String startDate=newEvent.getEventDate();
+	        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy"); 
+	        java.util.Date date = sdf1.parse(startDate); // Returns a Date format object with the pattern
+	        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+			mySt.setDate(5, sqlDate);
+			mySt.setTime(6, java.sql.Time.valueOf(newEvent.getEventTime()));
+			mySt.setInt(7, Integer.parseInt(newEvent.getRegistrationFees()));
+			mySt.setString(8, newEvent.getRegistrationForm());
+			mySt.setString(9, newEvent.getDescription());
+			
+		
+
+			// execute sql insert
+			mySt.execute();
+
+		}
+		// clean up jdbc objects
+		finally {
+			close(myCn, mySt, null);
 		}
 
 	}

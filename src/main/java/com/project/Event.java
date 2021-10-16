@@ -4,7 +4,7 @@ public class Event {
 	private int eventId;
 	private String eventName;
 	private String eventType;
-	private String eventCatagory;
+	private String eventCategory;
 	private String venue;
 	private String eventDate;
 	private String eventTime;
@@ -12,12 +12,12 @@ public class Event {
 	private String registrationForm;
 	private String description;
 
-	public Event(int eventId, String eventName, String eventType, String eventCatagory, String venue, String eventDate,
+	public Event(int eventId, String eventName, String eventType, String eventCategory, String venue, String eventDate,
 			String eventTime, String registrationFees, String registrationForm, String description) {
 		this.eventId = eventId;
 		this.eventName = eventName;
 		this.eventType = eventType;
-		this.eventCatagory = eventCatagory;
+		this.eventCategory = eventCategory;
 		this.venue = venue;
 		this.eventDate = eventDate;
 		this.eventTime = eventTime;
@@ -26,11 +26,11 @@ public class Event {
 		this.description = description;
 	}
 
-	public Event(String eventName, String eventType, String eventCatagory, String venue, String eventDate,
+	public Event(String eventName, String eventType, String eventCategory, String venue, String eventDate,
 			String eventTime, String registrationFees, String registrationForm, String description) {
 		this.eventName = eventName;
 		this.eventType = eventType;
-		this.eventCatagory = eventCatagory;
+		this.eventCategory = eventCategory;
 		this.venue = venue;
 		this.eventDate = eventDate;
 		this.eventTime = eventTime;
@@ -63,12 +63,12 @@ public class Event {
 		this.eventType = eventType;
 	}
 
-	public String getEventCatagory() {
-		return eventCatagory;
+	public String getEventCategory() {
+		return eventCategory;
 	}
 
-	public void setEventCatagory(String eventCatagory) {
-		this.eventCatagory = eventCatagory;
+	public void setEventCatagory(String eventCategory) {
+		this.eventCategory = eventCategory;
 	}
 
 	public String getVenue() {
