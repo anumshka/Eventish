@@ -51,9 +51,10 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 								<i class="fa fa-pencil-square-o url_name" aria-hidden="true"
 									style="font-size: 18px"></i>
 							</button></a>
+						<button type="submit" onclick="myFunction('${temp.eventId}')"
+							class="knowMores">Know more</button>
 					</div>
-					<button type="submit" onclick="myFunction('${temp.eventId}')"
-						class="knowMores">Know more</button>
+
 				</div>
 			</div>
 		</c:forEach>
