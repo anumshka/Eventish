@@ -101,6 +101,13 @@ body {
 	font-size: 4rem;
 }
 
+.searchContainer{
+	display:flex;
+	flex-direction:row;
+	margin:10px;
+	padding:10px;
+}
+
 .footer {
 	color: white;
 	text-align: center;
@@ -150,4 +157,8 @@ body {
 	font-size: 1.3rem;
 	color: black;
 	background: white;
+}
+.searchForms{
+	padding:10px;
+	margin:10px;
 }
