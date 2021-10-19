@@ -1,6 +1,8 @@
 package com.project;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,6 +51,7 @@ public class EventController extends HttpServlet {
 
 			// read the command parameter
 			String cmd = request.getParameter("cmd");
+			String searchBy = request.getParameter("searchBy");
 
 			// if cmd is missing , then list
 
@@ -72,7 +75,12 @@ public class EventController extends HttpServlet {
 				loadEvent(request, response);
 			case "UPDATE":
 				updateEvent(request, response);
-				
+				break;
+			case "SEARCH":
+
+				searchEvent(request, response);
+				break;
+
 			default:
 				listEvents(request, response);
 			}
@@ -83,48 +91,47 @@ public class EventController extends HttpServlet {
 		}
 	}
 
-	private void loadEvent(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	private void loadEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
-		
-				String epid = request.getParameter("epid");
 
-				// get episode from data base
-				Event temp = DaoEvent.getEvent(epid);
+		String epid = request.getParameter("epid");
 
-				// place the episode in request attribute
-				request.setAttribute("THE_EVENT", temp);
+		// get episode from data base
+		Event temp = DaoEvent.getEvent(epid);
 
-				// sent this to update-list jsp
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/update-event.jsp");
-				dispatcher.forward(request, response);
-		
+		// place the episode in request attribute
+		request.setAttribute("THE_EVENT", temp);
+
+		// sent this to update-list jsp
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/update-event.jsp");
+		dispatcher.forward(request, response);
+
 	}
 
 	private void updateEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
 		// read about event from form
-		         int epidInt = Integer.parseInt(request.getParameter("epidInt"));
-				String eventName = request.getParameter("event_name");
-				String eventType = request.getParameter("event_type");
-				String eventCategory = request.getParameter("event_category");
-				String venue = request.getParameter("venue");
-				String eventDate = request.getParameter("event_date");
-				String eventTime = request.getParameter("event_time");
-				String registrationFees = request.getParameter("registration_fees");
-				String registrationForm = request.getParameter("registration_form");
-				String description = request.getParameter("description");
+		int epidInt = Integer.parseInt(request.getParameter("epidInt"));
+		String eventName = request.getParameter("event_name");
+		String eventType = request.getParameter("event_type");
+		String eventCategory = request.getParameter("event_category");
+		String venue = request.getParameter("venue");
+		String eventDate = request.getParameter("event_date");
+		String eventTime = request.getParameter("event_time");
+		String registrationFees = request.getParameter("registration_fees");
+		String registrationForm = request.getParameter("registration_form");
+		String description = request.getParameter("description");
 
-				// create new event
-				Event newEvent = new Event(epidInt,eventName, eventType, eventCategory, venue, eventDate, eventTime, registrationFees,
-						registrationForm, description);
+		// create new event
+		Event newEvent = new Event(epidInt, eventName, eventType, eventCategory, venue, eventDate, eventTime,
+				registrationFees, registrationForm, description);
 
-				// add event
-				DaoEvent.updateEvent(newEvent);
+		// add event
+		DaoEvent.updateEvent(newEvent);
 
-				// get back to the main page
-				listEvents(request, response);
+		// get back to the main page
+		listEvents(request, response);
 
-		
 	}
 
 	private void listEvents(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -183,6 +190,58 @@ public class EventController extends HttpServlet {
 		}
 
 		listEvents(request, response);
+	}
+
+	private void searchEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		String searchBy = request.getParameter("searchBy");
+		System.out.println(searchBy);
+
+		if (searchBy.compareTo("name") == 0) {
+			String eveName = request.getParameter("evName");
+
+			ArrayList<Event> events = daoEvent.getEventByName(eveName);
+			System.out.println("Search event called");
+			for (Event event : events) {
+				System.out.println(event.getEventName());
+			}
+			request.setAttribute("EVENT_LIST", events);
+
+			// send to jsp page
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/list-events.jsp");
+			dispatcher.forward(request, response);
+		}
+
+		if (searchBy.compareTo("date") == 0) {
+			String eveDate = request.getParameter("evDate");
+			System.out.println(eveDate);
+			ArrayList<Event> events = daoEvent.getEventByDate(eveDate);
+			System.out.println("Search event called");
+			for (Event event : events) {
+				System.out.println(event.getEventName());
+			}
+			request.setAttribute("EVENT_LIST", events);
+
+			// send to jsp page
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/list-events.jsp");
+			dispatcher.forward(request, response);
+
+		}
+		if (searchBy.compareTo("category") == 0) {
+			String eveCat = request.getParameter("evCat");
+			System.out.println(eveCat);
+			ArrayList<Event> events = daoEvent.getEventByCategory(eveCat);
+			System.out.println("Search event called");
+			for (Event event : events) {
+				System.out.println(event.getEventName());
+			}
+			request.setAttribute("EVENT_LIST", events);
+
+			// send to jsp page
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/list-events.jsp");
+			dispatcher.forward(request, response);
+
+		}
 	}
 
 }
