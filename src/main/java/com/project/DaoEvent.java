@@ -273,6 +273,214 @@ public class DaoEvent {
 
 		
 	}
+	
+	public static ArrayList<Event> getEventByName(String eveName) {
+		Event temp = null;
+		ArrayList<Event> eventsArrayList = new ArrayList<Event>();
+		Connection myCn = null;
+		PreparedStatement myst = null;
+		ResultSet myRs = null;
+
+	    
+
+		try {
+
+		
+
+			// get connection to database
+			myCn = dataSource.getConnection();
+
+			// create sql to get selected student
+			String sql = "select * from event where event_name LIKE ?";
+
+			// create prepared statement
+			myst = myCn.prepareStatement(sql);
+
+			// set params
+			myst.setString(1, "%"+eveName+"%");
+
+			// execute statement
+			myRs = myst.executeQuery();
+
+			// retrieve data from result set row
+			while (myRs.next()) {
+				// Retrieve data from result set row
+		        int epidInt = myRs.getInt("event_id");
+				String eventName = myRs.getString("event_name");
+				String eventType = myRs.getString("event_type");
+				String eventCategory = myRs.getString("event_category");
+				String venue = myRs.getString("venue");
+				String eventDate = myRs.getString("event_date");
+				String eventTime = myRs.getString("event_time");
+				String registrationFees = myRs.getString("registration_fees");
+				String registrationForm = myRs.getString("registration_form");
+				String description = myRs.getString("description");
+
+				// Create a new event
+				temp = new Event(epidInt, eventName, eventType, eventCategory, venue, eventDate, eventTime,
+						registrationFees, registrationForm, description);
+				
+				eventsArrayList.add(temp);
+				
+
+			}  
+			return eventsArrayList;
+			
+			
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+		     finally {
+			// clean up jdbc objects
+
+			close(myCn, myst, myRs);
+		}
+
+	}
+	public static ArrayList<Event> getEventByCategory(String eveCat) {
+		Event temp = null;
+		ArrayList<Event> eventsArrayList = new ArrayList<Event>();
+		Connection myCn = null;
+		PreparedStatement myst = null;
+		ResultSet myRs = null;
+
+	    
+
+		try {
+
+		
+
+			// get connection to database
+			myCn = dataSource.getConnection();
+
+			// create sql to get selected student
+			String sql = "select * from event where event_category LIKE ?";
+
+			// create prepared statement
+			myst = myCn.prepareStatement(sql);
+
+			// set params
+			myst.setString(1, "%"+eveCat+"%");
+
+			// execute statement
+			myRs = myst.executeQuery();
+
+			// retrieve data from result set row
+			while (myRs.next()) {
+				// Retrieve data from result set row
+		        int epidInt = myRs.getInt("event_id");
+				String eventName = myRs.getString("event_name");
+				String eventType = myRs.getString("event_type");
+				String eventCategory = myRs.getString("event_category");
+				String venue = myRs.getString("venue");
+				String eventDate = myRs.getString("event_date");
+				String eventTime = myRs.getString("event_time");
+				String registrationFees = myRs.getString("registration_fees");
+				String registrationForm = myRs.getString("registration_form");
+				String description = myRs.getString("description");
+
+				// Create a new event
+				temp = new Event(epidInt, eventName, eventType, eventCategory, venue, eventDate, eventTime,
+						registrationFees, registrationForm, description);
+				
+				eventsArrayList.add(temp);
+				
+
+			}  
+			return eventsArrayList;
+			
+			
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+		     finally {
+			// clean up jdbc objects
+
+			close(myCn, myst, myRs);
+		}
+
+	}
+	
+	public static ArrayList<Event> getEventByDate(String eveDate) {
+		Event temp = null;
+		ArrayList<Event> eventsArrayList = new ArrayList<Event>();
+		Connection myCn = null;
+		PreparedStatement myst = null;
+		ResultSet myRs = null;
+
+	    
+
+		try {
+
+			System.out.println("Date given is "+eveDate);
+
+			// get connection to database
+			myCn = dataSource.getConnection();
+
+			// create sql to get selected student
+			
+			String sql = "select * from event where event_date = ?";
+			SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+			java.util.Date date = sdf1.parse(eveDate); // Returns a Date format object with the pattern
+			java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+			
+			System.out.println(sqlDate);
+			// create prepared statement
+			myst = myCn.prepareStatement(sql);
+
+			// set params
+			myst.setDate(1, sqlDate);
+
+			// execute statement
+			myRs = myst.executeQuery();
+
+			// retrieve data from result set row
+			while (myRs.next()) {
+				// Retrieve data from result set row
+		        int epidInt = myRs.getInt("event_id");
+				String eventName = myRs.getString("event_name");
+				String eventType = myRs.getString("event_type");
+				String eventCategory = myRs.getString("event_category");
+				String venue = myRs.getString("venue");
+				String eventDate = myRs.getString("event_date");
+				String eventTime = myRs.getString("event_time");
+				String registrationFees = myRs.getString("registration_fees");
+				String registrationForm = myRs.getString("registration_form");
+				String description = myRs.getString("description");
+
+				// Create a new event
+				temp = new Event(epidInt, eventName, eventType, eventCategory, venue, eventDate, eventTime,
+						registrationFees, registrationForm, description);
+				
+				eventsArrayList.add(temp);
+				
+
+			}  
+			return eventsArrayList;
+			
+			
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+		     finally {
+			// clean up jdbc objects
+
+			close(myCn, myst, myRs);
+		}
+
+	}
 }
+
+
+
 
 
