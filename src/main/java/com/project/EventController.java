@@ -68,6 +68,11 @@ public class EventController extends HttpServlet {
 
 				deleteEvent(request, response);
 				break;
+			case "LOAD":
+				loadEvent(request, response);
+			case "UPDATE":
+				updateEvent(request, response);
+				
 			default:
 				listEvents(request, response);
 			}
@@ -76,6 +81,50 @@ public class EventController extends HttpServlet {
 
 			e.printStackTrace();
 		}
+	}
+
+	private void loadEvent(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		// TODO Auto-generated method stub
+		
+				String epid = request.getParameter("epid");
+
+				// get episode from data base
+				Event temp = DaoEvent.getEvent(epid);
+
+				// place the episode in request attribute
+				request.setAttribute("THE_EVENT", temp);
+
+				// sent this to update-list jsp
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/update-event.jsp");
+				dispatcher.forward(request, response);
+		
+	}
+
+	private void updateEvent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		// read about event from form
+		         int epidInt = Integer.parseInt(request.getParameter("epidInt"));
+				String eventName = request.getParameter("event_name");
+				String eventType = request.getParameter("event_type");
+				String eventCategory = request.getParameter("event_category");
+				String venue = request.getParameter("venue");
+				String eventDate = request.getParameter("event_date");
+				String eventTime = request.getParameter("event_time");
+				String registrationFees = request.getParameter("registration_fees");
+				String registrationForm = request.getParameter("registration_form");
+				String description = request.getParameter("description");
+
+				// create new event
+				Event newEvent = new Event(epidInt,eventName, eventType, eventCategory, venue, eventDate, eventTime, registrationFees,
+						registrationForm, description);
+
+				// add event
+				DaoEvent.updateEvent(newEvent);
+
+				// get back to the main page
+				listEvents(request, response);
+
+		
 	}
 
 	private void listEvents(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -17,7 +17,7 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 
 	<div class="events-box">
 		<c:forEach var="temp" items="${EVENT_LIST}">
-			<c:url var="link" value="EpisodeController">
+			<c:url var="link" value="EventController">
 				<c:param name="cmd" value="LOAD" />
 				<c:param name="epid" value="${temp.eventId }" />
 			</c:url>
