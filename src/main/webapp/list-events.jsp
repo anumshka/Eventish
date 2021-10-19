@@ -10,10 +10,42 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 %>
 <body>
 
+
 	<button type="button" value="Add"
 		onclick="window.location.href='add-event.jsp' ; return  false;"
 		class="btn btn-outline-light" style="margin: 10px;">Add
 		Event?</button>
+	<div class="searchContainer">
+		<!-- Search by Name -->
+		<form action=EventController method=GET class="searchForms">
+			<input type="hidden" name="cmd" value="SEARCH"> <input
+				type="hidden" name="searchBy" value="name"> <input
+				type="text" name="evName" placeholder="Search by Name">
+			<button type="submit">
+				<i class="fa fa-search"></i>
+			</button>
+		</form>
+
+		<!-- Search by Event category-->
+		<form action=EventController method=GET class="searchForms">
+			<input type="hidden" name="cmd" value="SEARCH"> <input
+				type="hidden" name="searchBy" value="category"> <input
+				type="text" name="evCat" placeholder="Search by Category">
+			<button type="submit">
+				<i class="fa fa-search"></i>
+			</button>
+		</form>
+
+		<!-- Search by Event Date -->
+		<form action=EventController method=GET class="searchForms">
+			<input type="hidden" name="cmd" value="SEARCH"> <input
+				type="hidden" name="searchBy" value="date"> <input
+				type="date" name="evDate" placeholder="Search by Date">
+			<button type="submit">
+				<i class="fa fa-search"></i>
+			</button>
+		</form>
+	</div>
 
 	<div class="events-box">
 		<c:forEach var="temp" items="${EVENT_LIST}">
@@ -63,6 +95,9 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 	</div>
 	</div>
 	<script src="js/myJavascript.js"></script>
+	<script>
+		$("#evName").autocomplete("search-event.jsp");
+	</script>
 </body>
 <jsp:include page="footer.html"></jsp:include>
 </html>
