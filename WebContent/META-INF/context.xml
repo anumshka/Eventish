@@ -1,0 +1,13 @@
+
+<Context>
+
+<Resource name="jdbc/eventish" auth="Container" type="javax.sql.DataSource"
+          username="admin"
+          password="admin"
+          driverClassName="org.postgresql.Driver"
+          url="jdbc:postgresql://localhost:5432/eventish"
+          maxTotal="25"
+          maxIdle="10"
+          validationQuery="select 1" /> 
+          
+ </Context>
