@@ -28,10 +28,10 @@
 		<input type="text" name="registration_form"  value="${THE_EVENT.registrationForm  }" class="myFormInputs"><br> 
 		<label class="ques">Description</label><br>
 		<input type="text" name="description"  value="${THE_EVENT.description }"class="myFormInputs" required><br> 
-		<input type="submit" value="Save" class="save myFormInputs" ><br>
+		<input type="submit" value="Save" class="btn btn-success" ><br>
 		
 	</form>
-	<a href="EventController"><button class="back">Back</button></a>
+	<div class="text-center" ><a href="EventController"><button class="btn btn-danger">Back</button></a></div>
 	
 	<jsp:include page="footer.html"></jsp:include>
 </body>
