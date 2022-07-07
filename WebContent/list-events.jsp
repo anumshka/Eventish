@@ -107,8 +107,8 @@ List<Event> episodes = (List<Event>) request.getAttribute("EVENT_LIST");
 								<i class="fa fa-pencil-square-o url_name" aria-hidden="true"
 									style="font-size: 18px"></i>
 							</button></a>
-						<button type="submit" onclick="myFunction('${temp.eventId}')"
-							id='toggleButton' class="btn btn-primary">Know more</button>
+						<button type="submit" onclick="myFunction('${temp.eventId}','${temp.eventId + 10}')"
+							id='${temp.eventId+10}' class="btn btn-primary">Know more</button>
 					</div>
 
 				</div>
