@@ -2,10 +2,10 @@
 <Context>
 
 <Resource name="jdbc/eventish" auth="Container" type="javax.sql.DataSource"
-          username="admin"
-          password="admin"
+          username="qttguscfswxcky"
+          password="62d4182d1a44636e8b018b39bae7d5990fbe3aeed689424078a8f9b677e5fd1b"
           driverClassName="org.postgresql.Driver"
-          url="jdbc:postgresql://localhost:5432/eventish"
+          url="jdbc:postgresql://ec2-52-3-2-245.compute-1.amazonaws.com:5432/ddcm41bh3t6u7b"
           maxTotal="25"
           maxIdle="10"
           validationQuery="select 1" /> 

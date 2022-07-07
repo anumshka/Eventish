@@ -30,7 +30,7 @@ public class DaoEvent {
 		try {
 
 			// Get a connection
-			myCn = dataSource.getConnection();
+			myCn = MyConnection.createConnection();
 
 			// Create sql statement
 			String sql = "select * from event";
@@ -80,7 +80,7 @@ public class DaoEvent {
 		try {
 
 			// get db connection
-			myCn = dataSource.getConnection();
+			myCn = MyConnection.createConnection();
 
 			// create sql for insert
 			String sql = "INSERT INTO Event(event_name,event_type,event_category,venue,event_date,event_time,registration_fees,registration_form,description) VALUES(?,?,?,?,?,?,?,?,?)";
@@ -124,7 +124,7 @@ public class DaoEvent {
 		try {
 
 			// Get a connection
-			myCn = dataSource.getConnection();
+			myCn = MyConnection.createConnection();
 
 			// Create sql statement
 			String sql = "DELETE FROM event WHERE event_id=?";
@@ -185,7 +185,7 @@ public class DaoEvent {
 					epidInt = Integer.parseInt(epid);
 
 					// get connection to database
-					myCn = dataSource.getConnection();
+					myCn = MyConnection.createConnection();
 
 					// create sql to get selected student
 					String sql = "select * from event where event_id = ?";
@@ -239,7 +239,7 @@ public class DaoEvent {
 		try {
 
 			// get db connection
-			myCn = dataSource.getConnection();
+			myCn = MyConnection.createConnection();
 
 			// create sql for insert
 			String sql = "update event " + "set  event_name=? ,event_type=? ,event_category=? ,venue=? ,event_date=? ,event_time=? ,registration_fees=? ,registration_form=? ,description=? " + "where event_id=? ";
@@ -288,7 +288,7 @@ public class DaoEvent {
 		
 
 			// get connection to database
-			myCn = dataSource.getConnection();
+			myCn = MyConnection.createConnection();
 
 			// create sql to get selected student
 			String sql = "select * from event where event_name LIKE ?";
@@ -354,7 +354,7 @@ public class DaoEvent {
 		
 
 			// get connection to database
-			myCn = dataSource.getConnection();
+			myCn = MyConnection.createConnection();
 
 			// create sql to get selected student
 			String sql = "select * from event where event_category LIKE ?";
@@ -421,7 +421,7 @@ public class DaoEvent {
 			System.out.println("Date given is "+eveDate);
 
 			// get connection to database
-			myCn = dataSource.getConnection();
+			myCn = MyConnection.createConnection();
 
 			// create sql to get selected student
 			
