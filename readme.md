@@ -26,12 +26,6 @@ It involves MVC (Model-View-Controller) architecture.
 
 **DataBase:** PostgreSQL
 
-## Deployment
-
-The app is deployed here
-
-[LIVE](https://eventish-manage-events.herokuapp.com/EventController)
-
 ## Contributing
 
 [Hacktoberfest](https://hacktoberfest.digitalocean.com/)
